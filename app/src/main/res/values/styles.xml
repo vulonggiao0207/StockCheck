@@ -7,5 +7,76 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!--Button for Main Activity  -->
+    <style name="main_activity_button">
+        <item name="android:backgroundTint">#b1cef4</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_margin">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+    <!-- Header theme. Used for MainActivity only-->
+    <style name="header">
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:text">@string/main_headerTextView</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#b1cef4</item>
+    </style>
+    <!-- Header theme. Used for Item/ItemCheck/History only-->
+    <style name="header2">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#b1cef4</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+    <!--Listview Style. Use for all ListView -->
+    <style name="listview_style">
+        <item name="android:background">#ffffff</item>
+        <item name="android:isScrollContainer">false</item>
+        <item name="android:divider">#b5b5b5</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+    <!-- Add Button. Use for all Add Button -->
+    <style name="add_button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+    <!-- Back Button. Use for all Back Button -->
+    <style name="back_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dip</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:text">Back</item>
+        <item name="android:layout_weight">10</item>
+    </style>
+    <!-- Back TextView. Use for all Back TextView -->
+    <style name="back_textView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dip</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_weight">10</item>
+    </style>
+    <!-- Back TextView. Use for all Spinner -->
+    <style name="spinner_style">
+        <item name="android:textColor">#000000</item>
+        <item name="android:background">#dedede</item>
+        <item name="android:divider">#b5b5b5</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:popupBackground">#ffffff</item>
+    </style>
+    <style name="date_textview">
+        <item name="android:background">#fff</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
 
 </resources>
