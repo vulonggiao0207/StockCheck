@@ -17,15 +17,14 @@
         <Button
             style="@style/back_button"
             android:text="@string/sendButton"
-            android:id="@+id/saveButton"/>
+            android:id="@+id/sendButton"/>
     </LinearLayout>
     <TextView
         style="@style/header2"
         android:layout_width="match_parent"
         android:layout_height="45dip"
         android:text="@string/history_headerTextView"
-        android:id="@+id/SelectecItemtextView"
-        android:layout_weight="10"/>
+        android:id="@+id/SelectecItemtextView"/>
 
     <LinearLayout
         android:orientation="vertical"

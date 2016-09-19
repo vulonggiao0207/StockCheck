@@ -23,8 +23,7 @@ android:background="#b1cef4">
     android:layout_width="match_parent"
     android:layout_height="45dip"
     android:text="@string/item_headerTextView"
-    android:id="@+id/SelectecItemtextView"
-    android:layout_weight="10"/>
+    android:id="@+id/SelectecItemtextView"/>
 
 <LinearLayout
     android:orientation="vertical"

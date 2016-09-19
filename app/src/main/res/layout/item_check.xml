@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dip"
         android:text="@string/itemcheck_headerTextView"
-        android:id="@+id/SelectecItemtextView"
-        android:layout_weight="10"/>
+        android:id="@+id/SelectecItemtextView"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -51,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/itemCheck_dateTextView"
-                android:id="@+id/textView2" />
+                android:id="@+id/dateTextView" />
         </LinearLayout>
         <ListView
             style="@style/listview_style"

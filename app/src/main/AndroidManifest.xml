@@ -11,8 +11,31 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ItemManagementActivity"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="com.giao.stockcheck.ItemManagementActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ItemCheckActivity"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="com.giao.stockcheck.ItemCheckActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HistoryActivity"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="com.giao.stockcheck.HistoryActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

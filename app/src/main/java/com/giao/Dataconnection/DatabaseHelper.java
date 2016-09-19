@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Item_ListName="ListName";
     public static final String ItemName="ItemName";
     public static final String ItemUnit="Unit";
-    public static final String ItemDelete="Delete";
+    public static final String ItemDelete="Del";
     //Order ItemCheck columns
     public static final String ItemCheck_ItemID="ItemID";
     public static final String ItemCheck_Date="Date";
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 +");";
         String CreateTABLE_ORDER=//"CREATE TABLE IF NOT EXISTS Orders(OrderID INTEGER PRIMARY KEY AUTOINCREMENT, TableName TEXT NOT NULL, OrderDate NUMERIC NOT NULL, NumberOfCustomer INTEGER, OrderNote TEXT, OrderPaid REAL)";
                 "CREATE TABLE IF NOT EXISTS "+TABLE_ITEMCHECK+ " ("
-                +ItemCheck_ItemID+" INTEGER PRIMARY KEY, "
+                +ItemCheck_ItemID+" INTEGER NOT NULL, "
                 + ItemCheck_Date+ " NUMERIC NOT NULL, "
                 + ItemCheck_Quantity+ " NUMERIC NOT NULL, "
                 +"PRIMARY KEY("+ItemCheck_ItemID+","+ItemCheck_Date+")"
