@@ -3,17 +3,20 @@ package com.giao.Model;
 /**
  * Created by Long on 9/16/2016.
  */
-public class ItemCheck {
+public class ItemCheck extends Item{
+    private Item item;
     private String CheckDate;
     private int ItemID;
+    private long Quantity;
 
     public ItemCheck() {
     }
 
-    public ItemCheck(String checkDate, int itemID) {
+    public ItemCheck(String checkDate, int itemID,long quantity) {
 
         CheckDate = checkDate;
         ItemID = itemID;
+        Quantity=quantity;
     }
 
     public String getCheckDate() {
@@ -31,4 +34,17 @@ public class ItemCheck {
     public void setItemID(int itemID) {
         ItemID = itemID;
     }
+
+    public long getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        Quantity = quantity;
+    }
+
+    public Item Item() {
+        return super.Item();
+    }
+
 }

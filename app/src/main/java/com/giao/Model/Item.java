@@ -6,18 +6,33 @@ import java.util.ArrayList;
  * Created by Long on 9/16/2016.
  */
 public class Item  {
-    private String ListName;
     private int ItemID;
-    private boolean Delete;
+    private String ListName;
+    private String ItemName;
+    private String Unit;
+    private boolean Del;
     private ArrayList<ItemCheck> ItemCheck;
-
+    private Item Item;
     public Item() {
+        Item=this;
+    }
+    public Item(ArrayList<com.giao.Model.ItemCheck> itemCheck) {
+        ItemCheck = itemCheck;
+    }
+    public Item(boolean del, String listName, String itemName, String unit) {
+        Del = del;
+        ListName = listName;
+        ItemName = itemName;
+        Unit = unit;
     }
 
-    public Item(String listName, int itemID, boolean delete) {
-        ListName = listName;
+    public Item(int itemID, String listName, String itemName, String unit, boolean del, ArrayList<com.giao.Model.ItemCheck> itemCheck) {
         ItemID = itemID;
-        Delete = delete;
+        ListName = listName;
+        ItemName = itemName;
+        Unit = unit;
+        Del = del;
+        ItemCheck = itemCheck;
     }
 
     public String getListName() {
@@ -35,13 +50,28 @@ public class Item  {
     public void setItemID(int itemID) {
         ItemID = itemID;
     }
-
-    public boolean isDelete() {
-        return Delete;
+    public String getItemName() {
+        return ItemName;
     }
 
-    public void setDelete(boolean delete) {
-        Delete = delete;
+    public void setItemName(String itemName) {
+        ItemName = itemName;
+    }
+
+    public String getUnit() {
+        return Unit;
+    }
+
+    public void setUnit(String unit) {
+        Unit = unit;
+    }
+
+    public boolean isDel() {
+        return Del;
+    }
+
+    public void setDel(boolean del) {
+        Del = del;
     }
 
     public ArrayList<com.giao.Model.ItemCheck> getItemCheck() {
@@ -50,5 +80,18 @@ public class Item  {
 
     public void setItemCheck(ArrayList<com.giao.Model.ItemCheck> itemCheck) {
         ItemCheck = itemCheck;
+    }
+    public Item Item()
+    {
+        return Item;
+    }
+
+    public long Insert()
+    {
+        return 0;
+    }
+    public long Delete()
+    {
+        return 0;
     }
 }

@@ -9,15 +9,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="100"
-        android:id="@+id/itemNameEditText"/>
+        android:id="@+id/itemNameTextView"/>
     <TextView
         style="@style/item_unit_listview_item"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:id="@+id/itemUnitTextView"/>
     <EditText
-        style="@style/item_unit_listview_item"
+        style="@style/item_quantity_listview_item"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:id="@+id/itemQuantityTextView"/>
+        android:id="@+id/itemQuantityEditText"/>
+
 </LinearLayout>

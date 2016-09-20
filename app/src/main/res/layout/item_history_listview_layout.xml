@@ -14,5 +14,10 @@
         style="@style/item_unit_listview_item"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
+        android:id="@+id/itemUnitTextView"/>
+    <TextView
+        style="@style/item_unit_listview_item"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
         android:id="@+id/itemQuantityTextView"/>
 </LinearLayout>
