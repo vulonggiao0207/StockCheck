@@ -6,7 +6,7 @@
     <string name="main_itemCheckButton">Item Check</string>
     <string name="main_historyButton">History</string>
     <string name="backButton">Back</string>
-    <string name="addButton">Add</string>
+    <string name="addButton">+</string>
     <string name="deleteButton">Delete</string>
     <string name="saveButton">Save</string>
     <string name="sendButton">Send</string>

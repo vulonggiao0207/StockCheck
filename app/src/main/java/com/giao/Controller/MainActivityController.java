@@ -39,7 +39,9 @@ public class MainActivityController {
         return 1;
     }
     public int exitButton_onClick() {
-        activity.onBackPressed();
+        //android.os.Process.killProcess(Process.myPid());
+        System.exit(1);
+        //this.finish();
         return 1;
     }
 }
