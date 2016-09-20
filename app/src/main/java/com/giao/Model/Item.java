@@ -5,19 +5,20 @@ import java.util.ArrayList;
 /**
  * Created by Long on 9/16/2016.
  */
-public class Item  {
+public class Item  extends ItemList{
     private int ItemID;
     private String ListName;
     private String ItemName;
     private String Unit;
     private boolean Del;
-    private ArrayList<ItemCheck> ItemCheck;
+    private ArrayList<ItemCheck> ItemChecks;
     private Item Item;
+    private ItemList ItemList;
     public Item() {
         Item=this;
     }
-    public Item(ArrayList<com.giao.Model.ItemCheck> itemCheck) {
-        ItemCheck = itemCheck;
+    public Item(ArrayList<com.giao.Model.ItemCheck> itemChecks) {
+        ItemChecks = itemChecks;
     }
     public Item(boolean del, String listName, String itemName, String unit) {
         Del = del;
@@ -26,13 +27,13 @@ public class Item  {
         Unit = unit;
     }
 
-    public Item(int itemID, String listName, String itemName, String unit, boolean del, ArrayList<com.giao.Model.ItemCheck> itemCheck) {
+    public Item(int itemID, String listName, String itemName, String unit, boolean del, ArrayList<com.giao.Model.ItemCheck> itemChecks) {
         ItemID = itemID;
         ListName = listName;
         ItemName = itemName;
         Unit = unit;
         Del = del;
-        ItemCheck = itemCheck;
+        ItemChecks = itemChecks;
     }
 
     public String getListName() {
@@ -75,23 +76,18 @@ public class Item  {
     }
 
     public ArrayList<com.giao.Model.ItemCheck> getItemCheck() {
-        return ItemCheck;
+        return ItemChecks;
     }
 
-    public void setItemCheck(ArrayList<com.giao.Model.ItemCheck> itemCheck) {
-        ItemCheck = itemCheck;
+    public void setItemCheck(ArrayList<com.giao.Model.ItemCheck> itemChecks) {
+        ItemChecks = itemChecks;
     }
+
     public Item Item()
     {
         return Item;
     }
 
-    public long Insert()
-    {
-        return 0;
-    }
-    public long Delete()
-    {
-        return 0;
-    }
+    public ItemList ItemList(){return super.ItemList();}
+
 }

@@ -12,7 +12,7 @@ public class ItemCheck extends Item{
     public ItemCheck() {
     }
 
-    public ItemCheck(String checkDate, int itemID,long quantity) {
+    public ItemCheck(int itemID,String checkDate, long quantity) {
 
         CheckDate = checkDate;
         ItemID = itemID;

@@ -9,8 +9,9 @@ import java.util.List;
 public class ItemList {
     private String ListName;
     private ArrayList<ItemList> Items;
-
+    private ItemList ItemList;
     public ItemList() {
+        ItemList=this;
     }
 
     public ItemList(String listName) {
@@ -32,4 +33,6 @@ public class ItemList {
     public void setItems(ArrayList<ItemList> items) {
         Items = items;
     }
+
+    public ItemList ItemList(){return ItemList;}
 }
