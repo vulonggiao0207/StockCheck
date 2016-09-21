@@ -73,11 +73,11 @@ public class ItemCheckDAO {
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=AND " + ITEMCHECK_DATE + " = ?", new String[]{itemID,date});
     }
 
-    public boolean remove(String itemID, String date) throws SQLException {
+    public boolean delete(String itemID, String date) throws SQLException {
         return database.delete(DATABASE_TABLE, KEY_ROWID + "=AND " + ITEMCHECK_DATE + " = ?", new String[]{itemID,date}) >0;
     }
 
-    public boolean removeAll() {
+    public boolean delete() {
         return database.delete(DATABASE_TABLE, null, null) > 0;
     }
 }

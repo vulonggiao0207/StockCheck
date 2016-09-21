@@ -38,6 +38,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ItemList_Add_Remove_Dialog"
+            android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="com.giao.stockcheck.ItemList_Add_Remove_Dialog" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

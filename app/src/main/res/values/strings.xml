@@ -16,4 +16,5 @@
     <string name="itemCheck_dateTextView">Date:</string>
     <string name="itemcheck_headerTextView">Item Check</string>
     <string name="history_headerTextView">History</string>
+    <string name="addOrRemoveButton">OK</string>
 </resources>

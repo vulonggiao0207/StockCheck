@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/all_background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/back_button"
+            android:text="@string/backButton"
+            android:id="@+id/backButton"/>
+        <TextView
+            style="@style/back_textView"
+            android:id="@+id/textViewtemp1"
+            />
+        <Button
+            style="@style/back_button"
+            android:text="@string/addOrRemoveButton"
+            android:id="@+id/OKButton"/>
+    </LinearLayout>
+    <TextView
+        style="@style/header2"
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:text="Add/Delete Item List"
+        android:id="@+id/itemListHeaderTextView"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="bottom"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:text="Do you want to delete the list:"
+        android:id="@+id/addNewItemTextView" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dip"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        style="@style/control_view_background"
+        android:hint="@string/item_NameEditText"
+        android:id="@+id/addNewItemEditText"/>
+
+</LinearLayout>

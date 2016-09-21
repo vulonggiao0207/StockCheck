@@ -36,7 +36,7 @@ public class ItemListDAO {
     }
 
     public ArrayList<ItemList> select() throws SQLException {
-        String query = "SELECT * FROM ItemList";
+        String query = "SELECT ListName FROM ItemList";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<ItemList> list = new ArrayList<ItemList>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -64,11 +64,11 @@ public class ItemListDAO {
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemListName});
     }
 
-    public boolean remove(String itemListName) throws SQLException {
-        return database.delete(DATABASE_TABLE, KEY_ROWID + "=" + itemListName, null) > 0;
+    public boolean delete(String itemListName) throws SQLException {
+        return database.delete(DATABASE_TABLE, KEY_ROWID + "=?", new String[]{itemListName}) > 0;
     }
 
-    public boolean removeAll() {
+    public boolean delete() {
         return database.delete(DATABASE_TABLE, null, null) > 0;
     }
 

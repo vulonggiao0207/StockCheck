@@ -60,6 +60,24 @@ public class ItemDAO {
         cur.close();
         return list;
     }
+    public ArrayList<Item> select(String itemListName) throws SQLException {
+        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE listName='"+itemListName+"'";
+        Cursor cur = database.rawQuery(query, null);
+        ArrayList<Item> list = new ArrayList<Item>();
+        int iRow = cur.getColumnIndex(KEY_ROWID);
+        for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+            String listName,itemName,unit;
+            int itemID=Integer.parseInt(cur.getString(0));
+            listName=cur.getString(1);
+            itemName=cur.getString(2);
+            unit=cur.getString(3);
+            boolean del=Boolean.parseBoolean(cur.getString(4));;
+            Item record = new Item(itemID,listName,itemName,unit,del,new ArrayList<ItemCheck>());
+            list.add(record);
+        }
+        cur.close();
+        return list;
+    }
 
     public long create(String listName,String itemName,String unit) throws SQLException {
         ContentValues cv = new ContentValues();
@@ -80,13 +98,13 @@ public class ItemDAO {
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemID});
     }
 
-    public long remove(String itemID) throws SQLException {
+    public long delete(String itemID) throws SQLException {
         ContentValues cv = new ContentValues();
         cv.put(ITEM_DEL, 1);
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemID});
     }
 
-    public boolean removeAll() {
+    public boolean delete() {
         return database.delete(DATABASE_TABLE, null, null) > 0;
     }
 

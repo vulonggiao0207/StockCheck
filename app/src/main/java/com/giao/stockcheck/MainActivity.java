@@ -11,7 +11,6 @@ import android.widget.EditText;
 
 import com.giao.Controller.MainActivityController;
 import com.giao.Dataconnection.DatabaseHelper;
-import com.giao.View.ItemManagement;
 
 public class MainActivity extends Activity {
 
