@@ -43,7 +43,7 @@ public class ItemDAO {
     }
 
     public ArrayList<Item> select() throws SQLException {
-        String query = "SELECT itemID,listName,itemName,unit,del FROM Item";
+        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 ";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<Item> list = new ArrayList<Item>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -61,7 +61,7 @@ public class ItemDAO {
         return list;
     }
     public ArrayList<Item> select(String itemListName) throws SQLException {
-        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE listName='"+itemListName+"'";
+        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 AND listName='"+itemListName+"'";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<Item> list = new ArrayList<Item>();
         int iRow = cur.getColumnIndex(KEY_ROWID);

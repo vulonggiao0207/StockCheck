@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.giao.Controller.ItemManagementActivityController;
 import com.giao.Dataconnection.ItemListDAO;
@@ -96,6 +97,10 @@ public class ItemList_Add_Remove_Dialog extends Activity {
                 if(result==1) {
                     addNewItemEditText.setText("");
                     addNewItemEditText.setHint("");
+                    if(type==1)
+                        Toast.makeText(getBaseContext(), "New list is created successfully", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getBaseContext(), "List is deleted successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });

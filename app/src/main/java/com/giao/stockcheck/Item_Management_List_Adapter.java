@@ -1,13 +1,17 @@
 package com.giao.stockcheck;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.giao.Dataconnection.ItemDAO;
 import com.giao.Model.Item;
 
 import java.util.ArrayList;
@@ -22,7 +26,9 @@ public class Item_Management_List_Adapter extends BaseAdapter {
     public TextView itemNameTextView;
     public TextView itemUnitTextView;
     public Button deleteItemButton;
-
+    //This view/itemStr is used in AlertDialog
+    public View view;
+    public String itemStr="";
     public Item_Management_List_Adapter(Activity activity, ArrayList<Item> data)
     {
         this.activity=activity;
@@ -65,9 +71,43 @@ public class Item_Management_List_Adapter extends BaseAdapter {
         deleteItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int index = (Integer) v.getTag();
-                Item item = data.get(index);
-                //Doing delete Item
+                try {
+                    view=v;
+                    int index = (Integer) view.getTag();
+                    itemStr = data.get(index).getItemName();
+                    //Display Dialog
+                    AlertDialog.Builder mDialog = new AlertDialog.Builder(activity);
+                    mDialog.setTitle("Delete");
+                    mDialog.setMessage("Do you want to delete item "+itemStr);
+                    //If Agree delete --> Do deleting
+                    mDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which) {
+                            int index = (Integer) view.getTag();
+                            Item item = data.get(index);
+                            ItemDAO itemDAO = new ItemDAO(activity.getBaseContext());
+                            itemDAO.open();
+                            long result = itemDAO.delete(Integer.toString(item.getItemID()));
+                            itemDAO.close();
+                            if (result > 0) {
+                                Toast.makeText(activity.getBaseContext(), "Item '" + item.getItemName() + "' is deleted successfully", Toast.LENGTH_SHORT).show();
+                                data.remove(index);
+                                notifyDataSetChanged();
+                            }
+                            dialog.cancel();
+                        }
+                    });
+                    //If do not agree deleting --> return to parent view
+                    mDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = mDialog.create();
+                    alert.show();
+                } catch (Exception e) {
+                    Toast.makeText(activity.getBaseContext(), "Try again! Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
 
             }
         });

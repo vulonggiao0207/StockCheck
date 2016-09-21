@@ -37,8 +37,6 @@ public class ItemManagementActivity extends Activity {
         Initial();
         //Create Event;
         CreateEvent();
-
-
     }
     @Override
     protected void onResume()
@@ -79,12 +77,13 @@ public class ItemManagementActivity extends Activity {
         itemListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "onItemClick" , Toast.LENGTH_LONG).show();
+
                 int curPosition=position;
                 //Get position in Original Dish List
                 selectedList = (String) parent.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(), selectedList , Toast.LENGTH_LONG).show();
                 //Reload the Items ListView
-                int result= controller.itemListSpinner_onItemSelected(selectedList,itemListSpinner);
+                int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
 
             }
 
@@ -96,7 +95,11 @@ public class ItemManagementActivity extends Activity {
         addItemListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 controller.addItemListButton_onClick();
+                //Reload the Items ListView
+                int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
+
             }
         });
         deleteItemListButton.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +111,14 @@ public class ItemManagementActivity extends Activity {
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.addItemButton_onClick();
+                String itemName=itemNameEditText.getText().toString();
+                String unit=itemUnitEditText.getText().toString();
+                int result=controller.addItemButton_onClick(selectedList,itemName,unit);
+                if(result==1)
+                {
+                    Toast.makeText(getBaseContext(), "Item '" + itemName + "' is created successfully", Toast.LENGTH_SHORT).show();
+                    controller.itemListSpinner_onItemSelected(selectedList, itemListView);
+                }
             }
         });
     }

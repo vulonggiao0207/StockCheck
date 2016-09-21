@@ -3,13 +3,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.giao.Dataconnection.ItemDAO;
 import com.giao.Dataconnection.ItemListDAO;
+import com.giao.Model.Item;
 import com.giao.Model.ItemList;
 import com.giao.stockcheck.ItemList_Add_Remove_Dialog;
+import com.giao.stockcheck.Item_Management_List_Adapter;
 import com.giao.stockcheck.R;
 
 import java.util.ArrayList;
@@ -47,22 +50,22 @@ public class ItemManagementActivityController {
         }
         catch (Exception e)
         {
-            Toast.makeText(context, "The application gots error:"+e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "The application gots error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     public int backButton_onClick() {
         activity.onBackPressed();
         return 1;
     }
-
-    public int itemListSpinner_onItemSelected(String itemListName,Spinner itemListSpinner)
+    public int itemListSpinner_onItemSelected(String itemListName,ListView itemListView)
     {
         try
         {
             ItemDAO itemDAO = new ItemDAO(context);
             itemDAO.open();
-            itemDAO.select();
+            Item_Management_List_Adapter adapter=  new Item_Management_List_Adapter(activity,itemDAO.select(itemListName));
             itemDAO.close();
+            itemListView.setAdapter(adapter);
             return 1;
         }
         catch (Exception e)
@@ -98,9 +101,56 @@ public class ItemManagementActivityController {
             return -1;
         }
     }
-    public int addItemButton_onClick() {
+    public int addItemButton_onClick(String listName,String itemName, String Unit) {
 
-        return 1;
+        try{
+            //valication
+            String validation="Cannot create new Item:";
+            boolean isValid=true;
+            if(listName.trim().equals("") )
+            {
+                isValid=false;
+                validation+="\n- Item List cannot be blank.";
+            }
+            if(itemName.trim().equals("") )
+            {
+                isValid=false;
+                validation+="\n- Item name cannot be blank.";
+            }
+            if(Unit.trim().equals("") )
+            {
+                isValid=false;
+                validation+="\n- Unit cannot be blank.";
+            }
+            if(isValid==false)
+            {
+                Toast.makeText(context, validation, Toast.LENGTH_LONG).show();
+                return 0;
+            }
+            //Check if the Item already exists in the selected List
+            ItemDAO itemDAO = new ItemDAO(context);
+            itemDAO.open();
+            ArrayList<Item> Items= itemDAO.select(listName);
+            itemDAO.close();
+            for(Item item: Items)
+            {
+                if (item.getItemName().equals(itemName)&&item.getUnit().equals(Unit)) {
+                    Toast.makeText(context, "Item '" + itemName + "' already exists in List " + listName, Toast.LENGTH_SHORT).show();
+                    return 0;
+                }
+            }
+            //Create new after pass all validation
+            itemDAO.open();
+            long result = itemDAO.create(listName, itemName, Unit);
+            itemDAO.close();
+            return 1;
+
+        }
+        catch (Exception e)
+        {
+            //Toast.makeText(context, "The pplication gots error:"+e.getMessage(), Toast.LENGTH_LONG).show();
+            return -1;
+        }
     }
     //item_list_add_remove_dialog
     public int dialog_onCreate()
@@ -117,14 +167,14 @@ public class ItemManagementActivityController {
         try {
             if(listName.trim().equals(""))
             {
-                Toast.makeText(context, "List name cannot be blank.", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "List name cannot be blank.", Toast.LENGTH_SHORT).show();
                 return 1;
             }
             if(type==1 ) {
                 itemListDAO.open();
                 if(itemListDAO.select().contains(listName))
                 {
-                    Toast.makeText(context, "List name already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "List name already exists", Toast.LENGTH_SHORT).show();
                     itemListDAO.close();
                     return 1;
                 }
@@ -132,14 +182,12 @@ public class ItemManagementActivityController {
                 itemListDAO.open();
                 itemListDAO.create(listName);
                 itemListDAO.close();
-                Toast.makeText(context, "New list is created", Toast.LENGTH_LONG).show();
             }
             else
             {
                 itemListDAO.open();
                 itemListDAO.delete(listName);
                 itemListDAO.close();
-                Toast.makeText(context, "List is deleted", Toast.LENGTH_LONG).show();
             }
             return 1;
         }
