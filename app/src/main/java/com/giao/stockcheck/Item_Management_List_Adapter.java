@@ -78,7 +78,7 @@ public class Item_Management_List_Adapter extends BaseAdapter {
                     //Display Dialog
                     AlertDialog.Builder mDialog = new AlertDialog.Builder(activity);
                     mDialog.setTitle("Delete");
-                    mDialog.setMessage("Do you want to delete item "+itemStr);
+                    mDialog.setMessage("Do you want to delete item '"+itemStr+"'");
                     //If Agree delete --> Do deleting
                     mDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener()
                     {

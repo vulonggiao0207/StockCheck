@@ -39,9 +39,10 @@ public class ItemCheckDAO {
     public void close() throws SQLException {
         databaseHelper.close();
     }
-
     public ArrayList<ItemCheck> select() throws SQLException {
-        String query = "SELECT itemID,date,quantity FROM ItemCheck";
+        String query = "SELECT Item.itemID,date,ItemCheck.quantity FROM ItemCheck, Item ";
+        query+= " WHERE ItemCheck.itemID=ITem.itemID";
+        query+=" ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<ItemCheck> list = new ArrayList<ItemCheck>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -55,6 +56,31 @@ public class ItemCheckDAO {
         cur.close();
         return list;
     }
+    public ArrayList<ItemCheck> select(String listName) throws SQLException {
+        String query = "SELECT Item.itemID,date,ItemCheck.quantity FROM ItemCheck, Item ";
+        query+= " WHERE ItemCheck.itemID=ITem.itemID";
+        query+=" AND Item.ListName='"+listName+"'";
+        query+=" ORDER BY itemName";
+        Cursor cur = database.rawQuery(query, null);
+        ArrayList<ItemCheck> list = new ArrayList<ItemCheck>();
+        int iRow = cur.getColumnIndex(KEY_ROWID);
+        for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+            int itemID=Integer.parseInt(cur.getString(0));
+            String date=cur.getString(1);
+            long quantity= Long.parseLong(cur.getString(2));
+            //Get Item
+            ItemDAO itemDAO= new ItemDAO(context);
+            itemDAO.open();
+            Item Item=itemDAO.selectItem(cur.getString(0));
+            itemDAO.close();
+            //Create new Itemcheck
+            ItemCheck record = new ItemCheck(Item,itemID,date,quantity);
+            list.add(record);
+        }
+        cur.close();
+        return list;
+    }
+
 
     public long create(String itemID,String date,String quantity) throws SQLException {
         ContentValues cv = new ContentValues();

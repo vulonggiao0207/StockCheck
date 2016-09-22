@@ -10,6 +10,7 @@ public class Item  extends ItemList{
     private String ListName;
     private String ItemName;
     private String Unit;
+    private long Quantity;
     private boolean Del;
     private ArrayList<ItemCheck> ItemChecks;
     private Item Item;
@@ -20,18 +21,20 @@ public class Item  extends ItemList{
     public Item(ArrayList<com.giao.Model.ItemCheck> itemChecks) {
         ItemChecks = itemChecks;
     }
-    public Item(boolean del, String listName, String itemName, String unit) {
+    public Item(boolean del, String listName, String itemName, String unit, long quantity) {
         Del = del;
         ListName = listName;
         ItemName = itemName;
         Unit = unit;
+        Quantity=quantity;
     }
 
-    public Item(int itemID, String listName, String itemName, String unit, boolean del, ArrayList<com.giao.Model.ItemCheck> itemChecks) {
+    public Item(int itemID, String listName, String itemName, String unit,long quantity, boolean del, ArrayList<com.giao.Model.ItemCheck> itemChecks) {
         ItemID = itemID;
         ListName = listName;
         ItemName = itemName;
         Unit = unit;
+        Quantity=quantity;
         Del = del;
         ItemChecks = itemChecks;
     }
@@ -65,6 +68,14 @@ public class Item  extends ItemList{
 
     public void setUnit(String unit) {
         Unit = unit;
+    }
+
+    public long getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        Quantity = quantity;
     }
 
     public boolean isDel() {

@@ -18,6 +18,12 @@ public class ItemCheck extends Item{
         ItemID = itemID;
         Quantity=quantity;
     }
+    public ItemCheck(Item item, int itemID,String checkDate, long quantity) {
+        this.item=item;
+        CheckDate = checkDate;
+        ItemID = itemID;
+        Quantity=quantity;
+    }
 
     public String getCheckDate() {
         return CheckDate;
@@ -46,5 +52,7 @@ public class ItemCheck extends Item{
     public Item Item() {
         return super.Item();
     }
-
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }

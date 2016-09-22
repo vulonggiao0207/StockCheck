@@ -13,7 +13,7 @@
     <string name="item_headerTextView">Item Management</string>
     <string name="item_UnitEditText">Unit...</string>
     <string name="item_NameEditText">Item name...</string>
-    <string name="itemCheck_dateTextView">Date:</string>
+    <string name="itemCheck_dateTextView">Now:</string>
     <string name="itemcheck_headerTextView">Item Check</string>
     <string name="history_headerTextView">History</string>
     <string name="addOrRemoveButton">OK</string>

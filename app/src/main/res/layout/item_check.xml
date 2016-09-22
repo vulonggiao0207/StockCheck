@@ -22,7 +22,6 @@
         android:layout_height="45dip"
         android:text="@string/itemcheck_headerTextView"
         android:id="@+id/SelectecItemtextView"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -37,6 +36,7 @@
                 style="@style/spinner_style"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="1dp"
                 android:id="@+id/itemListSpinner"/>
         </LinearLayout>
         <LinearLayout
@@ -44,17 +44,23 @@
             android:layout_height="45dip">
             <TextView
                 style="@style/date_textview"
-                android:layout_width="match_parent"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:text="@string/itemCheck_dateTextView"
+                android:id="@+id/nowTextView" />
+            <TextView
+                style="@style/date_textview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:id="@+id/dateTextView" />
         </LinearLayout>
+
         <ListView
             style="@style/listview_style"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:id="@+id/itemListView"
-            android:layout_weight="100" />
+            android:layout_weight="100"/>
     </LinearLayout>
 
 

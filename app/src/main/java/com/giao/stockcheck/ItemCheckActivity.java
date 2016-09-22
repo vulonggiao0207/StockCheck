@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.giao.Controller.ItemCheckActivityController;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,11 +30,20 @@ public class ItemCheckActivity extends Activity {
     private Spinner itemListSpinner;
     private TextView dateTextView;
     private ListView itemListView;
+    public String selectedList="";
     public ItemCheckActivityController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_check);
+        //Declare View Controls
+        Initial();
+        //Create Events
+        CreateEvent();
+    }
+
+    private void Initial()
+    {
         //Declare View Controls
         backButton=(Button)findViewById(R.id.backButton);
         saveButton=(Button)findViewById(R.id.saveButton);
@@ -38,9 +51,11 @@ public class ItemCheckActivity extends Activity {
         dateTextView=(TextView)findViewById(R.id.dateTextView);
         itemListView=(ListView)findViewById(R.id.itemListView);
         controller= new ItemCheckActivityController(this);
+
     }
     private void CreateEvent()
     {
+        controller.onCreate(itemListSpinner);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,18 +65,29 @@ public class ItemCheckActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.saveButton_onClick();
+                int result=controller.saveButton_onClick(dateTextView.getText().toString(),itemListView);
             }
         });
         itemListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                controller.itemListSpinner_onItemSelected();
+                int curPosition=position;
+                //Get position in Original Dish List
+                selectedList = (String) parent.getItemAtPosition(position);
+                //Reload the Items ListView
+                int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
+
+                //Set current time
+                dateTextView.setText("");
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
+                Date date = new Date();
+                dateTextView.setText(dateFormat.format(date));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 controller.itemListSpinner_onNothingSelected();
+
             }
         });
 

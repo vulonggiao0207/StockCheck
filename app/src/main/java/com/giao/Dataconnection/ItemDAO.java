@@ -20,6 +20,7 @@ public class ItemDAO {
     private static final String ITEM_LISTNAME="ListName";
     private static final String ITEM_NAME="ItemName";
     private static final String ITEM_UNIT="Unit";
+    private static final String ITEM_QUANTITY="Quantity";
     private static final String ITEM_DEL="Del";
     private static final String DATABASE_TABLE = "Item";
     private static DatabaseHelper databaseHelper;
@@ -43,7 +44,7 @@ public class ItemDAO {
     }
 
     public ArrayList<Item> select() throws SQLException {
-        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 ";
+        String query = "SELECT itemID,listName,itemName,unit,quantity,del FROM Item WHERE del =0 ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<Item> list = new ArrayList<Item>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -53,15 +54,34 @@ public class ItemDAO {
             listName=cur.getString(1);
             itemName=cur.getString(2);
             unit=cur.getString(3);
-            boolean del=Boolean.parseBoolean(cur.getString(4));;
-            Item record = new Item(itemID,listName,itemName,unit,del,new ArrayList<ItemCheck>());
+            long quantity=Long.parseLong(cur.getString(4));
+            boolean del=Boolean.parseBoolean(cur.getString(5));;
+            Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
             list.add(record);
         }
         cur.close();
         return list;
     }
+    public Item selectItem(String ItemID) throws SQLException {
+        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 AND itemID="+ItemID+"  ORDER BY itemName";
+        Cursor cur = database.rawQuery(query, null);
+        int iRow = cur.getColumnIndex(KEY_ROWID);
+        for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+            String listName,itemName,unit;
+            int itemID=Integer.parseInt(cur.getString(0));
+            listName=cur.getString(1);
+            itemName=cur.getString(2);
+            unit=cur.getString(3);
+            long quantity=Long.parseLong(cur.getString(4));
+            boolean del=Boolean.parseBoolean(cur.getString(5));;
+            Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
+            return record;
+        }
+        cur.close();
+        return null;
+    }
     public ArrayList<Item> select(String itemListName) throws SQLException {
-        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 AND listName='"+itemListName+"'";
+        String query = "SELECT itemID,listName,itemName,unit,quantity,del FROM Item WHERE del =0 AND listName='"+itemListName+"' ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<Item> list = new ArrayList<Item>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -71,8 +91,9 @@ public class ItemDAO {
             listName=cur.getString(1);
             itemName=cur.getString(2);
             unit=cur.getString(3);
-            boolean del=Boolean.parseBoolean(cur.getString(4));;
-            Item record = new Item(itemID,listName,itemName,unit,del,new ArrayList<ItemCheck>());
+            long quantity=Long.parseLong(cur.getString(4));
+            boolean del=Boolean.parseBoolean(cur.getString(5));;
+            Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
             list.add(record);
         }
         cur.close();
@@ -84,17 +105,25 @@ public class ItemDAO {
         cv.put(ITEM_LISTNAME, listName);
         cv.put(ITEM_NAME, itemName);
         cv.put(ITEM_UNIT, unit);
+        cv.put(ITEM_QUANTITY,0);
         cv.put(ITEM_DEL, 0);
         return database.insert(DATABASE_TABLE, null, cv);
     }
 
-    public long update(String itemID,String listName,String itemName,String unit, String del) throws SQLException
+    public long update(String itemID,String listName,String itemName,String unit,String quantity, String del) throws SQLException
     {
         ContentValues cv = new ContentValues();
         cv.put(ITEM_LISTNAME, listName);
         cv.put(ITEM_NAME, itemName);
         cv.put(ITEM_UNIT, unit);
+        cv.put(ITEM_QUANTITY,quantity);
         cv.put(ITEM_DEL, del);
+        return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemID});
+    }
+    public long update(String itemID,String quantity) throws SQLException
+    {
+        ContentValues cv = new ContentValues();
+        cv.put(ITEM_QUANTITY,quantity);
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemID});
     }
 

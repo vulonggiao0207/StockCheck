@@ -19,13 +19,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Item_ListName="ListName";
     public static final String ItemName="ItemName";
     public static final String ItemUnit="Unit";
+    public static final String ItemQuantity="Quantity";
     public static final String ItemDelete="Del";
     //Order ItemCheck columns
     public static final String ItemCheck_ItemID="ItemID";
     public static final String ItemCheck_Date="Date";
     public static final String ItemCheck_Quantity="Quantity";
 
-    private static final int DATABASE_VERSION=1;
+    private static final int DATABASE_VERSION=2;
 
     private static Context context;
     public DatabaseHelper(Context context)
@@ -36,26 +37,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // TODO Auto-generated method stub
-        String CreateTABLE_TABLES="CREATE TABLE IF NOT EXISTS "+TABLE_ITEMLIST+" ("
+        String CreateTABLE_ITEMLIST="CREATE TABLE IF NOT EXISTS "+TABLE_ITEMLIST+" ("
                 + ListName+ " TEXT PRIMARY KEY NOT NULL "
                 +");";
-        String CreateTABLE_CATEGORY="CREATE TABLE IF NOT EXISTS "+TABLE_ITEM+" ("
+        String CreateTABLE_ITEM="CREATE TABLE IF NOT EXISTS "+TABLE_ITEM+" ("
                 + ItemID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + Item_ListName+ " TEXT NOT NULL, "
                 + ItemName+ " TEXT NOT NULL, "
                 + ItemUnit+ " TEXT NOT NULL, "
+                + ItemQuantity+ " REAL NOT NULL, "
                 + ItemDelete+ " INTEGER NOT NULL "
                 +");";
-        String CreateTABLE_ORDER=//"CREATE TABLE IF NOT EXISTS Orders(OrderID INTEGER PRIMARY KEY AUTOINCREMENT, TableName TEXT NOT NULL, OrderDate NUMERIC NOT NULL, NumberOfCustomer INTEGER, OrderNote TEXT, OrderPaid REAL)";
+        String CreateTABLE_ITEMCHECK=//"CREATE TABLE IF NOT EXISTS Orders(OrderID INTEGER PRIMARY KEY AUTOINCREMENT, TableName TEXT NOT NULL, OrderDate NUMERIC NOT NULL, NumberOfCustomer INTEGER, OrderNote TEXT, OrderPaid REAL)";
                 "CREATE TABLE IF NOT EXISTS "+TABLE_ITEMCHECK+ " ("
                 +ItemCheck_ItemID+" INTEGER NOT NULL, "
                 + ItemCheck_Date+ " NUMERIC NOT NULL, "
-                + ItemCheck_Quantity+ " NUMERIC NOT NULL, "
+                + ItemCheck_Quantity+ " REAL NOT NULL, "
                 +"PRIMARY KEY("+ItemCheck_ItemID+","+ItemCheck_Date+")"
                 +");";
-        db.execSQL(CreateTABLE_TABLES);
-        db.execSQL(CreateTABLE_CATEGORY);
-        db.execSQL(CreateTABLE_ORDER);
+        db.execSQL(CreateTABLE_ITEMLIST);
+        db.execSQL(CreateTABLE_ITEM);
+        db.execSQL(CreateTABLE_ITEMCHECK);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

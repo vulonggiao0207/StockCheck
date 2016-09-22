@@ -81,7 +81,6 @@ public class ItemManagementActivity extends Activity {
                 int curPosition=position;
                 //Get position in Original Dish List
                 selectedList = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getBaseContext(), selectedList , Toast.LENGTH_LONG).show();
                 //Reload the Items ListView
                 int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
 

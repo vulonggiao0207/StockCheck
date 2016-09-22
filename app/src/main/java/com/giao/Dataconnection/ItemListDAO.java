@@ -36,7 +36,7 @@ public class ItemListDAO {
     }
 
     public ArrayList<ItemList> select() throws SQLException {
-        String query = "SELECT ListName FROM ItemList";
+        String query = "SELECT ListName FROM ItemList ORDER BY ListName";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<ItemList> list = new ArrayList<ItemList>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
