@@ -40,9 +40,9 @@ public class ItemCheckDAO {
         databaseHelper.close();
     }
     public ArrayList<ItemCheck> select() throws SQLException {
-        String query = "SELECT Item.itemID,date,ItemCheck.quantity FROM ItemCheck, Item ";
+        String query = "SELECT Item.itemID,ItemCheck.date,ItemCheck.quantity FROM ItemCheck, Item ";
         query+= " WHERE ItemCheck.itemID=ITem.itemID";
-        query+=" ORDER BY itemName";
+        query+=" ORDER BY ItemCheck.date DESC";
         Cursor cur = database.rawQuery(query, null);
         ArrayList<ItemCheck> list = new ArrayList<ItemCheck>();
         int iRow = cur.getColumnIndex(KEY_ROWID);
@@ -50,15 +50,39 @@ public class ItemCheckDAO {
             int itemID=Integer.parseInt(cur.getString(0));
             String date=cur.getString(1);
             long quantity= Long.parseLong(cur.getString(2));
+            //Create new Itemcheck
             ItemCheck record = new ItemCheck(itemID,date,quantity);
             list.add(record);
         }
         cur.close();
         return list;
     }
+
     public ArrayList<ItemCheck> select(String listName) throws SQLException {
-        String query = "SELECT Item.itemID,date,ItemCheck.quantity FROM ItemCheck, Item ";
+        String query = "SELECT distinct(ItemCheck.date) FROM ItemCheck, Item";
         query+= " WHERE ItemCheck.itemID=ITem.itemID";
+        query+=" AND Item.ListName='"+listName+"'";
+        query+=" ORDER BY ItemCheck.date DESC";
+        Cursor cur = database.rawQuery(query, null);
+        ArrayList<ItemCheck> list = new ArrayList<ItemCheck>();
+        int iRow = cur.getColumnIndex(KEY_ROWID);
+        for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+            int itemID=0;
+            String date=cur.getString(0);
+            long quantity= 0;
+            //Create new Itemcheck
+            ItemCheck record = new ItemCheck(itemID,date,quantity);
+            //Add to ItemCheck List
+            list.add(record);
+        }
+        cur.close();
+        return list;
+    }
+
+    public ArrayList<ItemCheck> select(String listName,String selectedDate) throws SQLException {
+        String query = "SELECT Item.itemID,ItemCheck.date,ItemCheck.quantity FROM ItemCheck, Item";
+        query+= " WHERE ItemCheck.itemID=ITem.itemID";
+        query+= " AND ItemCheck.date='"+selectedDate+"'";
         query+=" AND Item.ListName='"+listName+"'";
         query+=" ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
@@ -68,20 +92,19 @@ public class ItemCheckDAO {
             int itemID=Integer.parseInt(cur.getString(0));
             String date=cur.getString(1);
             long quantity= Long.parseLong(cur.getString(2));
-            //Get Item
+            //get parent Item
             ItemDAO itemDAO= new ItemDAO(context);
             itemDAO.open();
-            Item Item=itemDAO.selectItem(cur.getString(0));
+            Item item= itemDAO.selectItem(cur.getString(0));
             itemDAO.close();
             //Create new Itemcheck
-            ItemCheck record = new ItemCheck(Item,itemID,date,quantity);
+            ItemCheck record = new ItemCheck(item,itemID,date,quantity);
+            //Add to ItemCheck List
             list.add(record);
         }
         cur.close();
         return list;
     }
-
-
     public long create(String itemID,String date,String quantity) throws SQLException {
         ContentValues cv = new ContentValues();
         cv.put(KEY_ROWID,itemID);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,9 +22,11 @@ public class Item_History_List_Adapter extends BaseAdapter{
     private ArrayList<ItemCheck> data;
     private static LayoutInflater inflater = null;
     public Activity activity;
+    public TextView itemIDTextView;
     public TextView itemNameTextView;
     public TextView itemUnitTextView;
     public TextView itemQuantityTextView;
+    public Button deleteItemButton;
 
     public Item_History_List_Adapter(Activity activity, ArrayList<ItemCheck> data)
     {
@@ -57,14 +60,27 @@ public class Item_History_List_Adapter extends BaseAdapter{
         }
         ItemCheck temp = (ItemCheck) data.get(position);
         //Create Control views
+        itemIDTextView=(TextView)vi.findViewById(R.id.itemIDTextView);
         itemNameTextView=(TextView) vi.findViewById(R.id.itemNameTextView);
         itemUnitTextView=(TextView)vi.findViewById(R.id.itemUnitTextView);
         itemQuantityTextView=(TextView)vi.findViewById(R.id.itemQuantityTextView);
+        deleteItemButton=(Button)vi.findViewById(R.id.deleteItemButton);
         //Set data
-        itemNameTextView.setText(temp.Item().getItemName());
-        itemUnitTextView.setText(temp.Item().getUnit());
+        itemIDTextView.setText(Integer.toString(temp.getItemID()));
+        itemNameTextView.setText(temp.getItem().getItemName());
+        itemUnitTextView.setText(temp.getItem().getUnit());
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         itemQuantityTextView.setText(decimalFormat.format(temp.getQuantity()));
+        deleteItemButton.setTag(position);
+        deleteItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = (Integer) v.getTag();
+                ItemCheck itemCheck = data.get(index);
+                data.remove(itemCheck);
+                notifyDataSetChanged();
+            }
+        });
         return vi;
     }
 }

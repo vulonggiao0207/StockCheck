@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,7 +32,7 @@ public class ItemCheckActivity extends Activity {
     private Spinner itemListSpinner;
     private TextView dateTextView;
     private ListView itemListView;
-    public String selectedList="";
+    public String selectedListName="";
     public ItemCheckActivityController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +67,26 @@ public class ItemCheckActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int result=controller.saveButton_onClick(dateTextView.getText().toString(),itemListView);
+                saveButton.setFocusable(true);
+                int result = controller.saveButton_onClick(dateTextView.getText().toString(), itemListView);
+            }
+        });
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LinearLayout _parent = (LinearLayout) view.getParent();
+                EditText quantityEditText = (EditText) _parent.findViewById(R.id.itemQuantityEditText);
+                quantityEditText.setFocusable(true);
             }
         });
         itemListSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int curPosition=position;
+                int curPosition = position;
                 //Get position in Original Dish List
-                selectedList = (String) parent.getItemAtPosition(position);
+                selectedListName = (String) parent.getItemAtPosition(position);
                 //Reload the Items ListView
-                int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
-
+                int result = controller.itemListSpinner_onItemSelected(selectedListName, itemListView);
                 //Set current time
                 dateTextView.setText("");
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");

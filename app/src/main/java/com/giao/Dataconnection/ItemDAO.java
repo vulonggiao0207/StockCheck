@@ -66,6 +66,7 @@ public class ItemDAO {
         String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 AND itemID="+ItemID+"  ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
         int iRow = cur.getColumnIndex(KEY_ROWID);
+        Item record= new Item();
         for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
             String listName,itemName,unit;
             int itemID=Integer.parseInt(cur.getString(0));
@@ -73,12 +74,12 @@ public class ItemDAO {
             itemName=cur.getString(2);
             unit=cur.getString(3);
             long quantity=Long.parseLong(cur.getString(4));
-            boolean del=Boolean.parseBoolean(cur.getString(5));;
-            Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
-            return record;
+            boolean del=false;
+            record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
+            break;
         }
         cur.close();
-        return null;
+        return record;
     }
     public ArrayList<Item> select(String itemListName) throws SQLException {
         String query = "SELECT itemID,listName,itemName,unit,quantity,del FROM Item WHERE del =0 AND listName='"+itemListName+"' ORDER BY itemName";

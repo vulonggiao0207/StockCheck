@@ -89,6 +89,7 @@ public class Item_Check_List_Adapter extends BaseAdapter {
                     LinearLayout _parent = (LinearLayout) v.getParent();
                     EditText quantityEditText = (EditText) _parent.findViewById(R.id.itemQuantityEditText);
                     data.get(position).setQuantity(Long.parseLong(quantityEditText.getText().toString()));
+                    //notifyDataSetChanged();
                 }
             }
         });
@@ -101,14 +102,15 @@ public class Item_Check_List_Adapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //arrayItem[holder.indexReference]= s.toString();
-                data.get(holder.indexReference).setQuantity(Long.parseLong(s.toString()));
+                //data.get(holder.indexReference).setQuantity(Long.parseLong(s.toString()));
                 //Toast.makeText(activity.getBaseContext(), s.toString()+" update "+data.get(holder.indexReference).getItemName() , Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 //arrayItem[holder.indexReference]= s.toString();
-                //data.get(holder.indexReference).setQuantity(Long.parseLong(s.toString()));
+                data.get(holder.indexReference).setQuantity(Long.parseLong(s.toString()));
+                //notifyDataSetChanged();
             }
         });
 

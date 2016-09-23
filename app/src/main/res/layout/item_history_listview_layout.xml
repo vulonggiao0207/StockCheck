@@ -7,6 +7,11 @@
     android:layout_gravity="center_vertical">
     <TextView
         style="@style/item_name_listview_item"
+        android:layout_width="1dp"
+        android:layout_height="42dp"
+        android:id="@+id/itemIDTextView"/>
+    <TextView
+        style="@style/item_name_listview_item"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_weight="100"
@@ -21,10 +26,15 @@
         android:layout_width="90dp"
         android:layout_height="42dp"
         android:id="@+id/itemQuantityTextView"/>
-    <CheckBox
-        style="@style/item_unit_listview_item"
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="35dp"
-        android:layout_height="42dp"
-        android:id="@+id/itemCheckBox"
-        android:checked="true"/>
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:backgroundTint="#4a8149"
+        android:background="#4a8149"
+        android:text="X"
+        android:textSize="18dp"
+        android:id="@+id/deleteItemButton"/>
+
 </LinearLayout>

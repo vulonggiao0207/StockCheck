@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -96,27 +97,17 @@ public class ItemCheckActivityController {
             ItemCheckDAO itemcheckDAO= new ItemCheckDAO(context);
             //Get the Array<Item> saveItems from itemListView
             ArrayList<Item> savedItems= new ArrayList<>();
-            for(int i =0;i<itemListView.getChildCount();i++){
-                Item item = new Item();
-                LinearLayout layout = (LinearLayout)itemListView.getChildAt(i);
-                String itemID = ((TextView)layout.getChildAt(0)).getText().toString();
-                String quantity = ((EditText)layout.getChildAt(3)).getText().toString();
-                try {item.setItemID(Integer.parseInt(itemID));}
-                catch(Exception e){item.setItemID(0);}
-                try {item.setQuantity(Long.parseLong(quantity));}
-                catch(Exception e){item.setQuantity(0);}
-                savedItems.add(item);
+
+            ListAdapter orderList= itemListView.getAdapter();
+            for(int i=0;i<orderList.getCount();i++)
+            {
+                savedItems.add((Item) orderList.getItem(i));
             }
             //Go through every single line of ListView
             for(Item item: savedItems)
             {
                 String itemid=Integer.toString(item.getItemID());
-                //String listname=item.getListName();
-                //String itemname=item.getItemName();
-                //String unit=item.getUnit();
                 String quantity=Long.toString(item.getQuantity());
-                //String del=Boolean.toString(item.isDel());
-                //Update the new quantity to Item (ItemID,quantity)
                 itemDAO.open();
                 itemDAO.update(itemid,quantity);
                 itemDAO.close();
