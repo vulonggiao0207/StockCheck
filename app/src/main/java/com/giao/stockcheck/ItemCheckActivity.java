@@ -69,6 +69,11 @@ public class ItemCheckActivity extends Activity {
             public void onClick(View v) {
                 saveButton.setFocusable(true);
                 int result = controller.saveButton_onClick(dateTextView.getText().toString(), itemListView);
+                //Reset current date
+                dateTextView.setText("");
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss ");
+                Date date = new Date();
+                dateTextView.setText(dateFormat.format(date));
             }
         });
         itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

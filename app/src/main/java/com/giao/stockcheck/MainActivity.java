@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.giao.Controller.MainActivityController;
 import com.giao.Dataconnection.DatabaseHelper;
+import com.giao.Dataconnection.InitialData;
 
 public class MainActivity extends Activity {
 
@@ -71,9 +72,8 @@ public class MainActivity extends Activity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
         if (!prefs.getBoolean("firstTime", false)) {
             // <---- run your one time code here
-            //InitData initData = new InitData(this.getBaseContext());
-            //initData.InitDatabase();
-            //    InitDatabase(this.context);
+            InitialData initdata= new InitialData(getBaseContext());
+            initdata.InitData();
             // mark first time has runned.
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);

@@ -19,14 +19,14 @@ import com.giao.Controller.ItemManagementActivityController;
  */
 public class ItemManagementActivity extends Activity {
 
-    private static Button backButton;
-    private static Spinner itemListSpinner;
-    private static EditText itemNameEditText;
-    private static EditText itemUnitEditText;
-    private static Button addItemListButton;
-    private static Button deleteItemListButton;
-    private static Button addItemButton;
-    private static ListView itemListView;
+    private Button backButton;
+    private Spinner itemListSpinner;
+    private EditText itemNameEditText;
+    private EditText itemUnitEditText;
+    private Button addItemListButton;
+    private Button deleteItemListButton;
+    private Button addItemButton;
+    private ListView itemListView;
     private String selectedList;
     public ItemManagementActivityController controller;
     @Override
@@ -43,6 +43,11 @@ public class ItemManagementActivity extends Activity {
     {
         super.onResume();
         controller.onCreate(itemListSpinner);
+        //Reload the Items ListView
+        int result= controller.itemListSpinner_onItemSelected(selectedList,itemListView);
+        //reset control views
+        itemNameEditText.setText("");
+        itemUnitEditText.setText("");
     }
     private void Initial()
     {

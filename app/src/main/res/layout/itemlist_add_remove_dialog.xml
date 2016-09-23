@@ -43,7 +43,7 @@
         android:paddingLeft="5dp"
         android:gravity="center_vertical"
         style="@style/control_view_background"
-        android:hint="@string/item_NameEditText"
+        android:hint="List name..."
         android:id="@+id/addNewItemEditText"/>
 
 </LinearLayout>

@@ -185,6 +185,13 @@ public class ItemManagementActivityController {
             }
             else
             {
+                //delete all ItemCheck
+                //delete all Item
+                ItemDAO itemDAO= new ItemDAO(context);
+                itemDAO.open();
+                itemDAO.delete(listName,1);
+                itemDAO.close();
+                //delete all ItemList
                 itemListDAO.open();
                 itemListDAO.delete(listName);
                 itemListDAO.close();

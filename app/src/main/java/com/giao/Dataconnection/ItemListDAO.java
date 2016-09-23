@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.giao.Model.ItemList;
 
 import java.util.ArrayList;

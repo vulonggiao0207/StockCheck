@@ -134,6 +134,11 @@ public class ItemDAO {
         cv.put(ITEM_DEL, 1);
         return database.update(DATABASE_TABLE, cv, KEY_ROWID + "=?", new String[]{itemID});
     }
+    public long delete(String listName,int i) throws SQLException {
+        ContentValues cv = new ContentValues();
+        cv.put(ITEM_DEL, 1);
+        return database.update(DATABASE_TABLE, cv, ITEM_LISTNAME + "=?", new String[]{listName});
+    }
 
     public boolean delete() {
         return database.delete(DATABASE_TABLE, null, null) > 0;
