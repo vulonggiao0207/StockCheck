@@ -49,7 +49,7 @@ public class ItemCheckDAO {
         for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
             int itemID=Integer.parseInt(cur.getString(0));
             String date=cur.getString(1);
-            long quantity= Long.parseLong(cur.getString(2));
+            BigDecimal quantity= new BigDecimal(cur.getString(2));
             //Create new Itemcheck
             ItemCheck record = new ItemCheck(itemID,date,quantity);
             list.add(record);
@@ -69,7 +69,7 @@ public class ItemCheckDAO {
         for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
             int itemID=0;
             String date=cur.getString(0);
-            long quantity= 0;
+            BigDecimal quantity= new BigDecimal(0);
             //Create new Itemcheck
             ItemCheck record = new ItemCheck(itemID,date,quantity);
             //Add to ItemCheck List
@@ -91,7 +91,7 @@ public class ItemCheckDAO {
         for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
             int itemID=Integer.parseInt(cur.getString(0));
             String date=cur.getString(1);
-            long quantity= Long.parseLong(cur.getString(2));
+            BigDecimal quantity= new BigDecimal(cur.getString(2));
             //get parent Item
             ItemDAO itemDAO= new ItemDAO(context);
             itemDAO.open();

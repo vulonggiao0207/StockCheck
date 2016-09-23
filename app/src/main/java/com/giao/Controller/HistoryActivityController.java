@@ -19,6 +19,7 @@ import com.giao.Model.ItemList;
 import com.giao.stockcheck.Item_History_List_Adapter;
 import com.giao.stockcheck.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -75,7 +76,8 @@ public class HistoryActivityController {
                 //sentItems.add((ItemCheck) itemList.getItem(i));
                 ItemCheck item=(ItemCheck) itemList.getItem(i);
                 msg+=item.getItem().getItemName();
-                msg+= item.getQuantity();
+                DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                msg+=": "+ decimalFormat.format(item.getQuantity());
                 msg+=" ("+item.getItem().getUnit()+") ";
                 msg+="\n";
             }

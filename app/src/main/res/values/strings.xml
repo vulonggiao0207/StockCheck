@@ -7,7 +7,7 @@
     <string name="main_historyButton">History</string>
     <string name="backButton">Back</string>
     <string name="addButton">+</string>
-    <string name="deleteButton">Delete</string>
+    <string name="deleteButton">X</string>
     <string name="saveButton">Save</string>
     <string name="sendButton">Send</string>
     <string name="item_headerTextView">Item Management</string>

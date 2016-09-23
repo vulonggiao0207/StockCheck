@@ -1,5 +1,6 @@
 package com.giao.Model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ public class Item  extends ItemList{
     private String ListName;
     private String ItemName;
     private String Unit;
-    private long Quantity;
+    private BigDecimal Quantity;
     private boolean Del;
     private ArrayList<ItemCheck> ItemChecks;
     private Item Item;
@@ -21,7 +22,7 @@ public class Item  extends ItemList{
     public Item(ArrayList<com.giao.Model.ItemCheck> itemChecks) {
         ItemChecks = itemChecks;
     }
-    public Item(boolean del, String listName, String itemName, String unit, long quantity) {
+    public Item(boolean del, String listName, String itemName, String unit, BigDecimal quantity) {
         Del = del;
         ListName = listName;
         ItemName = itemName;
@@ -29,7 +30,8 @@ public class Item  extends ItemList{
         Quantity=quantity;
     }
 
-    public Item(int itemID, String listName, String itemName, String unit,long quantity, boolean del, ArrayList<com.giao.Model.ItemCheck> itemChecks) {
+    public Item(int itemID, String listName, String itemName, String unit,BigDecimal quantity,
+                boolean del, ArrayList<ItemCheck> itemChecks) {
         ItemID = itemID;
         ListName = listName;
         ItemName = itemName;
@@ -70,12 +72,36 @@ public class Item  extends ItemList{
         Unit = unit;
     }
 
-    public long getQuantity() {
+    public BigDecimal getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(BigDecimal quantity) {
         Quantity = quantity;
+    }
+
+    public ArrayList<ItemCheck> getItemChecks() {
+        return ItemChecks;
+    }
+
+    public void setItemChecks(ArrayList<ItemCheck> itemChecks) {
+        ItemChecks = itemChecks;
+    }
+
+    public Item getItem() {
+        return Item;
+    }
+
+    public void setItem(com.giao.Model.Item item) {
+        Item = item;
+    }
+
+    public ItemList getItemList() {
+        return ItemList;
+    }
+
+    public void setItemList(com.giao.Model.ItemList itemList) {
+        ItemList = itemList;
     }
 
     public boolean isDel() {
@@ -86,11 +112,11 @@ public class Item  extends ItemList{
         Del = del;
     }
 
-    public ArrayList<com.giao.Model.ItemCheck> getItemCheck() {
+    public ArrayList<ItemCheck> getItemCheck() {
         return ItemChecks;
     }
 
-    public void setItemCheck(ArrayList<com.giao.Model.ItemCheck> itemChecks) {
+    public void setItemCheck(ArrayList<ItemCheck> itemChecks) {
         ItemChecks = itemChecks;
     }
 

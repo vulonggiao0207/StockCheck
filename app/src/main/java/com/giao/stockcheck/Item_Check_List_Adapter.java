@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.giao.Model.Item;
+
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -88,7 +90,10 @@ public class Item_Check_List_Adapter extends BaseAdapter {
                 if (!hasFocus) {
                     LinearLayout _parent = (LinearLayout) v.getParent();
                     EditText quantityEditText = (EditText) _parent.findViewById(R.id.itemQuantityEditText);
-                    data.get(position).setQuantity(Long.parseLong(quantityEditText.getText().toString()));
+                    try {
+                        data.get(position).setQuantity(new BigDecimal(quantityEditText.getText().toString()));
+                    }
+                    catch(Exception e){data.get(position).setQuantity(new BigDecimal(0));}
                     //notifyDataSetChanged();
                 }
             }
@@ -109,7 +114,11 @@ public class Item_Check_List_Adapter extends BaseAdapter {
             @Override
             public void afterTextChanged(Editable s) {
                 //arrayItem[holder.indexReference]= s.toString();
-                data.get(holder.indexReference).setQuantity(Long.parseLong(s.toString()));
+
+                try {
+                    data.get(holder.indexReference).setQuantity(new BigDecimal(s.toString()));
+                }
+                catch(Exception e){data.get(holder.indexReference).setQuantity(new BigDecimal(0));}
                 //notifyDataSetChanged();
             }
         });

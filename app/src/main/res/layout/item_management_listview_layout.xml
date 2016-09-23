@@ -17,9 +17,12 @@
         android:id="@+id/itemUnitTextView"/>
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:textColor="#841919"
+        android:textColor="#ff0000"
+        android:backgroundTint="#4a8149"
+        android:background="#4a8149"
         android:text="@string/deleteButton"
+        android:textSize="18dp"
         android:id="@+id/deleteItemButton"/>
 </LinearLayout>

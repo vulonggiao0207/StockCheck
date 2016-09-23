@@ -1,5 +1,7 @@
 package com.giao.Model;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Long on 9/16/2016.
  */
@@ -7,18 +9,18 @@ public class ItemCheck extends Item{
     private Item item;
     private String CheckDate;
     private int ItemID;
-    private long Quantity;
+    private BigDecimal Quantity;
 
     public ItemCheck() {
     }
 
-    public ItemCheck(int itemID,String checkDate, long quantity) {
+    public ItemCheck(int itemID,String checkDate, BigDecimal quantity) {
 
         CheckDate = checkDate;
         ItemID = itemID;
         Quantity=quantity;
     }
-    public ItemCheck(Item item, int itemID,String checkDate, long quantity) {
+    public ItemCheck(Item item, int itemID,String checkDate, BigDecimal quantity) {
         this.item=item;
         CheckDate = checkDate;
         ItemID = itemID;
@@ -41,11 +43,11 @@ public class ItemCheck extends Item{
         ItemID = itemID;
     }
 
-    public long getQuantity() {
+    public BigDecimal getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(BigDecimal quantity) {
         Quantity = quantity;
     }
 

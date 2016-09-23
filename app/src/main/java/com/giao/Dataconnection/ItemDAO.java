@@ -10,6 +10,7 @@ import com.giao.Model.Item;
 import com.giao.Model.ItemCheck;
 import com.giao.Model.ItemList;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -54,7 +55,7 @@ public class ItemDAO {
             listName=cur.getString(1);
             itemName=cur.getString(2);
             unit=cur.getString(3);
-            long quantity=Long.parseLong(cur.getString(4));
+            BigDecimal quantity= new BigDecimal(cur.getString(4));
             boolean del=Boolean.parseBoolean(cur.getString(5));;
             Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
             list.add(record);
@@ -63,7 +64,7 @@ public class ItemDAO {
         return list;
     }
     public Item selectItem(String ItemID) throws SQLException {
-        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE del =0 AND itemID="+ItemID+"  ORDER BY itemName";
+        String query = "SELECT itemID,listName,itemName,unit,del FROM Item WHERE itemID="+ItemID+"  ORDER BY itemName";
         Cursor cur = database.rawQuery(query, null);
         int iRow = cur.getColumnIndex(KEY_ROWID);
         Item record= new Item();
@@ -73,7 +74,7 @@ public class ItemDAO {
             listName=cur.getString(1);
             itemName=cur.getString(2);
             unit=cur.getString(3);
-            long quantity=Long.parseLong(cur.getString(4));
+            BigDecimal quantity= new BigDecimal(cur.getString(4));
             boolean del=false;
             record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
             break;
@@ -92,7 +93,7 @@ public class ItemDAO {
             listName=cur.getString(1);
             itemName=cur.getString(2);
             unit=cur.getString(3);
-            long quantity=Long.parseLong(cur.getString(4));
+            BigDecimal quantity=new BigDecimal(cur.getString(4));
             boolean del=Boolean.parseBoolean(cur.getString(5));;
             Item record = new Item(itemID,listName,itemName,unit,quantity,del,new ArrayList<ItemCheck>());
             list.add(record);

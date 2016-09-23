@@ -23,6 +23,7 @@ import com.giao.stockcheck.Item_Check_List_Adapter;
 import com.giao.stockcheck.Item_Management_List_Adapter;
 import com.giao.stockcheck.R;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +66,7 @@ public class ItemCheckActivityController {
         try {
             AlertDialog.Builder mDialog = new AlertDialog.Builder(activity);
             mDialog.setTitle("Back");
-            mDialog.setMessage("Are you sure you already save your work!");
+            mDialog.setMessage("Please make sure you already saved your work before quit.\nClick Yes to quit!");
             mDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     //Doing save here
@@ -107,7 +108,7 @@ public class ItemCheckActivityController {
             for(Item item: savedItems)
             {
                 String itemid=Integer.toString(item.getItemID());
-                String quantity=Long.toString(item.getQuantity());
+                String quantity=(item.getQuantity().toString());
                 itemDAO.open();
                 itemDAO.update(itemid,quantity);
                 itemDAO.close();
